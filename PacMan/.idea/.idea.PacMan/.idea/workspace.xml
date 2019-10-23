@@ -10,7 +10,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Node.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -25,18 +25,100 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/PacmanController.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="89" selection-start-line="17" selection-start-column="89" selection-end-line="17" selection-end-column="89" />
+              <folding>
+                <marker date="1571851762296" expanded="true" signature="6:78" ph="..." />
+                <marker date="1571851762296" expanded="true" signature="125:474" ph="{...}" />
+                <marker date="1571851762296" expanded="true" signature="250:310" ph="{...}" />
+                <marker date="1571851762296" expanded="true" signature="368:472" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+              <folding>
+                <marker date="1571851399810" expanded="true" signature="6:92" ph="..." />
+                <marker date="1571851399810" expanded="true" signature="137:590" ph="{...}" />
+                <marker date="1571851399810" expanded="true" signature="227:273" ph="{...}" />
+                <marker date="1571851399810" expanded="true" signature="354:393" ph="{...}" />
+                <marker date="1571851399810" expanded="true" signature="419:588" ph="{...}" />
+                <marker date="1571851399810" expanded="true" signature="477:535" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/TileGrid.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="33" column="69" selection-start-line="33" selection-start-column="69" selection-end-line="33" selection-end-column="69" />
+              <folding>
+                <marker date="1571851743852" expanded="false" signature="6:78" ph="..." />
+                <marker date="1571851743852" expanded="true" signature="117:2011" ph="{...}" />
+                <marker date="1571851743852" expanded="true" signature="307:510" ph="{...}" />
+                <marker date="1571851743852" expanded="true" signature="533:1158" ph="{...}" />
+                <marker date="1571851743852" expanded="true" signature="742:1152" ph="{...}" />
+                <marker date="1571851743852" expanded="true" signature="800:1142" ph="{...}" />
+                <marker date="1571851743852" expanded="true" signature="1218:1618" ph="{...}" />
+                <marker date="1571851743852" expanded="true" signature="1643:2008" ph="{...}" />
+                <marker date="1571851743852" expanded="true" signature="1764:2002" ph="{...}" />
+                <marker date="1571851743852" expanded="true" signature="1814:1992" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Tile.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+              <folding>
+                <marker date="1571851743833" expanded="false" signature="6:78" ph="..." />
+                <marker date="1571851743833" expanded="true" signature="97:354" ph="{...}" />
+                <marker date="1571851743833" expanded="true" signature="252:352" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Instance</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Node.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PacmanController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Tile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TileGrid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../Work/Showdown/build/Showdown/Assets/App/K1Scripts/Runtime/KindlyBeast/Showdown/Core/ShowdownApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Node.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/TileGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Tile.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PacmanController.cs" />
       </list>
     </option>
   </component>
@@ -90,10 +172,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="17396">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="17396" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -108,12 +190,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571766310651</updated>
-      <workItem from="1571766316837" duration="989000" />
+      <workItem from="1571766316837" duration="5213000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="989000" />
+    <option name="totallyTimeSpent" value="5213000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -139,11 +221,12 @@
       <window_info anchor="bottom" id="Unit Tests" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Performance Profiler" />
+      <window_info anchor="bottom" id="Performance Profiler" weight="0.32991803" />
+      <window_info anchor="bottom" id="Change Signature" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39959016" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -171,6 +254,13 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Grid.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Node.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -180,6 +270,75 @@
             <marker date="1571766678833" expanded="true" signature="113:591" ph="{...}" />
             <marker date="1571766678833" expanded="true" signature="258:589" ph="{...}" />
             <marker date="1571766678833" expanded="true" signature="373:583" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Work/Showdown/build/Showdown/Assets/App/K1Scripts/Runtime/KindlyBeast/Showdown/Core/ShowdownApplication.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#250#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+          <folding>
+            <marker date="1571851399810" expanded="true" signature="6:92" ph="..." />
+            <marker date="1571851399810" expanded="true" signature="137:590" ph="{...}" />
+            <marker date="1571851399810" expanded="true" signature="227:273" ph="{...}" />
+            <marker date="1571851399810" expanded="true" signature="354:393" ph="{...}" />
+            <marker date="1571851399810" expanded="true" signature="419:588" ph="{...}" />
+            <marker date="1571851399810" expanded="true" signature="477:535" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/TileGrid.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="33" column="69" selection-start-line="33" selection-start-column="69" selection-end-line="33" selection-end-column="69" />
+          <folding>
+            <marker date="1571851743852" expanded="false" signature="6:78" ph="..." />
+            <marker date="1571851743852" expanded="true" signature="117:2011" ph="{...}" />
+            <marker date="1571851743852" expanded="true" signature="307:510" ph="{...}" />
+            <marker date="1571851743852" expanded="true" signature="533:1158" ph="{...}" />
+            <marker date="1571851743852" expanded="true" signature="742:1152" ph="{...}" />
+            <marker date="1571851743852" expanded="true" signature="800:1142" ph="{...}" />
+            <marker date="1571851743852" expanded="true" signature="1218:1618" ph="{...}" />
+            <marker date="1571851743852" expanded="true" signature="1643:2008" ph="{...}" />
+            <marker date="1571851743852" expanded="true" signature="1764:2002" ph="{...}" />
+            <marker date="1571851743852" expanded="true" signature="1814:1992" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Tile.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+          <folding>
+            <marker date="1571851743833" expanded="false" signature="6:78" ph="..." />
+            <marker date="1571851743833" expanded="true" signature="97:354" ph="{...}" />
+            <marker date="1571851743833" expanded="true" signature="252:352" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/PacmanController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="89" selection-start-line="17" selection-start-column="89" selection-end-line="17" selection-end-column="89" />
+          <folding>
+            <marker date="1571851762296" expanded="true" signature="6:78" ph="..." />
+            <marker date="1571851762296" expanded="true" signature="125:474" ph="{...}" />
+            <marker date="1571851762296" expanded="true" signature="250:310" ph="{...}" />
+            <marker date="1571851762296" expanded="true" signature="368:472" ph="{...}" />
           </folding>
         </state>
       </provider>
