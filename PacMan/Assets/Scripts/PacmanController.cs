@@ -7,17 +7,17 @@ public class PacmanController : MonoBehaviour
     [SerializeField] private float m_speed = 4.0f;
     [SerializeField]private Node m_currentNode;
 
-    private const float MINIMUM_DISTANCE_TO_NODE = 0.1f;
+    private const float MINIMUM_DISTANCE_TO_NODE = 0.25f;
 
     private Node m_previousNode;
     private Node m_targetNode;
     private Vector2 m_currentDirection = Vector2.zero;
     private Vector2 m_queuedDirection = Vector2.zero;
-    private static GameController m_controller;
-    
+
+    public Vector2 CurrentDirection => m_currentDirection;
+
     void Start()
     {
-        m_controller = GameController.Instance;
         UpdateMovementTarget(Vector2.left);
     }
 

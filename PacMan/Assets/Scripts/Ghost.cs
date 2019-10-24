@@ -1,32 +1,34 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-    [SerializeField]protected float m_speed = 3.0f;
-    [SerializeField]protected Node m_currentNode;
+    [SerializeField] protected float m_speed = 3.0f;
+    [SerializeField] protected Node m_currentNode;
     [SerializeField] protected Transform m_ScatterTarget;
-    [SerializeField] protected Transform m_ChaseTarget;
+    [SerializeField] protected Vector3 m_ChaseTarget;
+    [SerializeField] protected GhostMode m_currentMode = GhostMode.Chase;
 
-    protected const float MINIMUM_DISTANCE_TO_NODE = 0.1f;
+    protected const float MINIMUM_DISTANCE_TO_NODE = 0.25f;
 
     protected Node m_previousNode;
     protected Node m_targetNode;
     protected Vector2 m_currentDirection = Vector2.zero;
-    
-    protected enum GhostMode
+
+    public enum GhostMode
     {
         Chase,
         Scatter,
         Frightened,
-        Reverse
     }
 
-    protected GhostMode m_currentMode = GhostMode.Frightened;
-    protected GhostMode m_nextMode;
-    
+    private void Awake()
+    {
+    }
+
     private void Update()
     {
         if (m_currentMode == GhostMode.Scatter)
@@ -63,7 +65,8 @@ public class Ghost : MonoBehaviour
     {
         if (m_targetNode == null)
         {
-            MoveTowardsTarget(m_ChaseTarget.position);
+            SetTarget();
+            MoveTowardsTarget(m_ChaseTarget);
         }
 
         if (m_targetNode != null)
@@ -147,6 +150,11 @@ public class Ghost : MonoBehaviour
         m_currentNode = null;
     }
 
+    public void ChangeMode(GhostMode newMode)
+    {
+        ReverseDirection();
+        m_currentMode = newMode;
+    }
 
     public void Teleport(Node connectedNode)
     {
@@ -154,5 +162,9 @@ public class Ghost : MonoBehaviour
         m_previousNode = connectedNode;
         m_currentNode = connectedNode;
         m_targetNode = null;
+    }
+
+    public virtual void SetTarget()
+    {
     }
 }

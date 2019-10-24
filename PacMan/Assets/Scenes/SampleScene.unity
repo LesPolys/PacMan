@@ -32590,8 +32590,8 @@ GameObject:
   - component: {fileID: 845685329}
   - component: {fileID: 845685328}
   - component: {fileID: 845685327}
-  - component: {fileID: 845685326}
   - component: {fileID: 845685331}
+  - component: {fileID: 845685332}
   m_Layer: 0
   m_Name: Blinky
   m_TagString: Ghost
@@ -32599,22 +32599,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &845685326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845685325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60ffcad94c3e7aa49959959f7098cd4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_speed: 3
-  m_currentNode: {fileID: 574163961}
-  m_ScatterTarget: {fileID: 456569684}
-  m_ChaseTarget: {fileID: 844240229}
 --- !u!65 &845685327
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32705,6 +32689,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &845685332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845685325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c8bba220675c904f8ef75a5dc10cf52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_speed: 3
+  m_currentNode: {fileID: 574163961}
+  m_ScatterTarget: {fileID: 456569684}
+  m_ChaseTarget: {x: 0, y: 0, z: 0}
+  m_currentMode: 0
 --- !u!1001 &846431484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34321,6 +34322,7 @@ GameObject:
   - component: {fileID: 878367286}
   - component: {fileID: 878367285}
   - component: {fileID: 878367284}
+  - component: {fileID: 878367289}
   m_Layer: 0
   m_Name: Inky
   m_TagString: Ghost
@@ -34412,12 +34414,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878367283}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.87, y: 20.5, z: 7.9342184}
+  m_LocalPosition: {x: 15, y: 24, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 535575108}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &878367289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878367283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775a6d0ebe02e204b8ac7c07c042a1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_speed: 3
+  m_currentNode: {fileID: 1523475629}
+  m_ScatterTarget: {fileID: 1981721613}
+  m_ChaseTarget: {x: 0, y: 0, z: 0}
+  m_currentMode: 0
 --- !u!1001 &878737615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42057,7 +42076,19 @@ MonoBehaviour:
   - {fileID: 1233755452}
   - {fileID: 1349624697}
   m_ScoreText: {fileID: 1648816678}
-  m_Player: {fileID: 844240228}
+  m_Inky: {fileID: 878367283}
+  m_Blinky: {fileID: 845685325}
+  m_Pinky: {fileID: 1642582843}
+  m_Clyde: {fileID: 1180194764}
+  m_Player: {fileID: 844240233}
+  m_GhostModeTimes:
+  - 7
+  - 20
+  - 7
+  - 20
+  - 5
+  - 20
+  - 5
 --- !u!1 &1049009337
 GameObject:
   m_ObjectHideFlags: 0
@@ -47124,6 +47155,7 @@ GameObject:
   - component: {fileID: 1180194768}
   - component: {fileID: 1180194767}
   - component: {fileID: 1180194766}
+  - component: {fileID: 1180194770}
   - component: {fileID: 1180194765}
   m_Layer: 0
   m_Name: Clyde
@@ -47216,12 +47248,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180194764}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.87, y: 20.5, z: 7.9342184}
+  m_LocalPosition: {x: 15, y: 24, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 535575108}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1180194770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180194764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a208e7d9f09fe46933b251200c3996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_speed: 3
+  m_currentNode: {fileID: 1523475629}
+  m_ScatterTarget: {fileID: 455631681}
+  m_ChaseTarget: {x: 0, y: 0, z: 0}
+  m_currentMode: 0
 --- !u!1 &1183632084
 GameObject:
   m_ObjectHideFlags: 0
@@ -62121,6 +62170,7 @@ GameObject:
   - component: {fileID: 1642582846}
   - component: {fileID: 1642582845}
   - component: {fileID: 1642582844}
+  - component: {fileID: 1642582849}
   m_Layer: 0
   m_Name: Pinky
   m_TagString: Ghost
@@ -62212,12 +62262,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642582843}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.87, y: 20.5, z: 7.9342184}
+  m_LocalPosition: {x: 15, y: 24, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 535575108}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1642582849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642582843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3092d6c19c3278642a35b94d46244ef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_speed: 3
+  m_currentNode: {fileID: 1523475629}
+  m_ScatterTarget: {fileID: 1779192421}
+  m_ChaseTarget: {x: 0, y: 0, z: 0}
+  m_currentMode: 0
 --- !u!1 &1644614870 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7394575409292718536, guid: 31518ad8faa09954689e2306c2c47df1,
