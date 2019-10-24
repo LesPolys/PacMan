@@ -10,7 +10,7 @@ public class Board : MonoBehaviour
     public float tileRadius;
     private Tile[,] grid;
 
-    float tileDiameter;
+    public float tileDiameter;
     int gridSizeX, gridSizeY;
 
     void Start()
@@ -62,4 +62,8 @@ public class Board : MonoBehaviour
         }
     }
 
+    public Vector3 GetRandomTile()
+    {
+        return grid[Random.Range(0,gridSizeX), Random.Range(0,gridSizeY)].position;
+    }
 }

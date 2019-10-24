@@ -11,5 +11,10 @@ public class Portal : MonoBehaviour
         {
             other.gameObject.GetComponent<PacmanController>().Teleport(m_connectedNode);
         }
+
+        if (other.gameObject.tag == "Ghost")
+        {
+            other.gameObject.GetComponent<Ghost>().Teleport(m_connectedNode);
+        }
     }
 }

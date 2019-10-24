@@ -8,17 +8,13 @@
       <e p="Assets" t="Include">
         <e p="Portal.cs" t="Include" />
         <e p="Scripts" t="Include">
-          <e p="Blinky.cs" t="Include" />
           <e p="Board.cs" t="Include" />
-          <e p="Clyde.cs" t="Include" />
           <e p="Collectable.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="Ghost.cs" t="Include" />
-          <e p="Inky.cs" t="Include" />
           <e p="Node.cs" t="Include" />
           <e p="PacmanController.cs" t="Include" />
           <e p="Pellet.cs" t="Include" />
-          <e p="Pinky.cs" t="Include" />
           <e p="Powerup.cs" t="Include" />
           <e p="Tile.cs" t="Include" />
         </e>

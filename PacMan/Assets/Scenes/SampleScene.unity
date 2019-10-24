@@ -32591,9 +32591,10 @@ GameObject:
   - component: {fileID: 845685328}
   - component: {fileID: 845685327}
   - component: {fileID: 845685326}
+  - component: {fileID: 845685331}
   m_Layer: 0
   m_Name: Blinky
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32607,12 +32608,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 845685325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c8bba220675c904f8ef75a5dc10cf52, type: 3}
+  m_Script: {fileID: 11500000, guid: 60ffcad94c3e7aa49959959f7098cd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 4
-  m_currentNode: {fileID: 0}
-  m_ScatterTarget: {x: 0, y: 0, z: 0}
+  m_speed: 3
+  m_currentNode: {fileID: 574163961}
+  m_ScatterTarget: {fileID: 456569684}
+  m_ChaseTarget: {fileID: 844240229}
 --- !u!65 &845685327
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32621,7 +32623,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845685325}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -32681,12 +32683,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845685325}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.87, y: 20.5, z: 7.9342184}
+  m_LocalPosition: {x: 12, y: 24, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 535575108}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &845685331
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845685325}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &846431484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34305,26 +34323,27 @@ GameObject:
   - component: {fileID: 878367284}
   m_Layer: 0
   m_Name: Inky
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &878367284
-MonoBehaviour:
+  m_IsActive: 0
+--- !u!54 &878367284
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878367283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 775a6d0ebe02e204b8ac7c07c042a1d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_speed: 4
-  m_currentNode: {fileID: 0}
-  m_ScatterTarget: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &878367285
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34333,7 +34352,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878367283}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -41951,6 +41970,7 @@ MonoBehaviour:
     m_Bits: 512
   gridSize: {x: 32, y: 36}
   tileRadius: 0.5
+  tileDiameter: 0
 --- !u!4 &1048453187
 Transform:
   m_ObjectHideFlags: 0
@@ -47107,26 +47127,27 @@ GameObject:
   - component: {fileID: 1180194765}
   m_Layer: 0
   m_Name: Clyde
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1180194765
-MonoBehaviour:
+  m_IsActive: 0
+--- !u!54 &1180194765
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180194764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c32913abf85c6be4b802c5a71cfab56c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_speed: 4
-  m_currentNode: {fileID: 0}
-  m_ScatterTarget: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &1180194766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47135,7 +47156,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180194764}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -62102,26 +62123,27 @@ GameObject:
   - component: {fileID: 1642582844}
   m_Layer: 0
   m_Name: Pinky
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1642582844
-MonoBehaviour:
+  m_IsActive: 0
+--- !u!54 &1642582844
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642582843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3092d6c19c3278642a35b94d46244ef0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_speed: 4
-  m_currentNode: {fileID: 0}
-  m_ScatterTarget: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &1642582845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -62130,7 +62152,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642582843}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
