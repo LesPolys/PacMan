@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileGrid : MonoBehaviour
+public class Board : MonoBehaviour
 {
     public LayerMask wallMask;
+    public LayerMask intersectionMask;
     public Vector2 gridSize;
     public float tileRadius;
     private Tile[,] grid;
+    private Dictionary<Vector2, Node> m_nodeDictionary;
 
     float tileDiameter;
     int gridSizeX, gridSizeY;
@@ -17,6 +19,7 @@ public class TileGrid : MonoBehaviour
         tileDiameter = tileRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridSize.x / tileDiameter);
         gridSizeY = Mathf.RoundToInt(gridSize.y / tileDiameter);
+        m_nodeDictionary = new Dictionary<Vector2, Node>();
         CreateGrid();
     }
 
