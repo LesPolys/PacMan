@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Board m_gameGrid;
     [SerializeField] private List<Node> m_IntersectionPoints;
     [SerializeField] private TextMeshProUGUI m_ScoreText;
+    [SerializeField] private GameObject m_Player;
     
     private Dictionary<Vector3,Node> m_IntersectionNodeDictionary;
     private int m_score = 0;

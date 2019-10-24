@@ -9,7 +9,6 @@ public class Board : MonoBehaviour
     public Vector2 gridSize;
     public float tileRadius;
     private Tile[,] grid;
-    private Dictionary<Vector2, Node> m_nodeDictionary;
 
     float tileDiameter;
     int gridSizeX, gridSizeY;
@@ -19,7 +18,6 @@ public class Board : MonoBehaviour
         tileDiameter = tileRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridSize.x / tileDiameter);
         gridSizeY = Mathf.RoundToInt(gridSize.y / tileDiameter);
-        m_nodeDictionary = new Dictionary<Vector2, Node>();
         CreateGrid();
     }
 
