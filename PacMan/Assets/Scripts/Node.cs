@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *Nodes are are the structure we will use to keep track of intersections in the maze
+ *node have a series of connected neighbors with an associated direction
+ * to be queried by ghosts and player to move between locations.
+ */
 public class Node : MonoBehaviour
 {
     public Node[] neighbors;
-
     public Vector2[] validDirections;
     
-    // Start is called before the first frame update
-    void Start()
+     void Start()
     {
         validDirections = new Vector2[neighbors.Length];
 

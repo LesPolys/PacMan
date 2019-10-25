@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.VersionControl;
-using UnityEngine;
+﻿using UnityEngine;
+
+/*
+ * Base class used by all ghosts
+ * handles all ghost movement and mode changes
+ * all child classes take over providing the target positon to use during the chase mode.
+ */
 
 public class Ghost : MonoBehaviour
 {
@@ -11,12 +13,38 @@ public class Ghost : MonoBehaviour
     [SerializeField] protected Transform m_ScatterTarget;
     [SerializeField] protected Vector3 m_ChaseTarget;
     [SerializeField] protected GhostMode m_currentMode = GhostMode.Chase;
+    [SerializeField] protected Material m_NormalMaterial;
+    [SerializeField] protected Material m_FrightnedMaterial;
 
-    protected const float MINIMUM_DISTANCE_TO_NODE = 0.25f;
+    private Node m_SpawnNode;
+    private bool m_IsDead;
+    private float m_DeathTimer = 0;
+
+    private const float MAX_DEATH_TIME = 5f;
+    
+    protected const float MINIMUM_DISTANCE_TO_NODE = 0.3f;
 
     protected Node m_previousNode;
     protected Node m_targetNode;
     protected Vector2 m_currentDirection = Vector2.zero;
+
+    public GhostMode CurrentMode
+    {
+        get => m_currentMode;
+        set
+        {
+            if (value == GhostMode.Frightened)
+            {
+                this.gameObject.GetComponent<Renderer>().material = m_FrightnedMaterial;
+            }
+
+            if (m_currentMode == GhostMode.Frightened && value != GhostMode.Frightened)
+            {
+                this.gameObject.GetComponent<Renderer>().material = m_NormalMaterial;
+            }
+            m_currentMode = value; 
+        }
+    }
 
     public enum GhostMode
     {
@@ -27,25 +55,49 @@ public class Ghost : MonoBehaviour
 
     private void Awake()
     {
+        m_SpawnNode = m_currentNode;
+    }
+
+    private void Start()
+    {
+        GameController.Instance.OnStateChange += HandleOnStateChange;
     }
 
     private void Update()
     {
-        if (m_currentMode == GhostMode.Scatter)
+        if (!m_IsDead)
         {
-            Scatter();
-        }
+            if (m_currentMode == GhostMode.Scatter)
+            {
+                Scatter();
+            }
 
-        if (m_currentMode == GhostMode.Chase)
-        {
-            Chase();
-        }
+            if (m_currentMode == GhostMode.Chase)
+            {
+                Chase();
+            }
         
-        if (m_currentMode == GhostMode.Frightened)
-        {
-            Frightened();
+            if (m_currentMode == GhostMode.Frightened)
+            {
+                Frightened();
+            }
+            
+            if (m_targetNode != null)
+            {
+                Move();
+            } 
         }
-        
+        else
+        {
+            m_DeathTimer += Time.deltaTime;
+            if (m_DeathTimer >= MAX_DEATH_TIME)
+            {
+                m_IsDead = false;
+                m_DeathTimer = 0;
+                this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                this.gameObject.GetComponent<Collider>().enabled = true;
+            }
+        }
     }
 
     protected void Scatter()
@@ -53,11 +105,6 @@ public class Ghost : MonoBehaviour
         if (m_targetNode == null)
         {
             MoveTowardsTarget(m_ScatterTarget.position);
-        }
-
-        if (m_targetNode != null)
-        {
-            Move();
         }
     }
 
@@ -68,11 +115,6 @@ public class Ghost : MonoBehaviour
             SetTarget();
             MoveTowardsTarget(m_ChaseTarget);
         }
-
-        if (m_targetNode != null)
-        {
-            Move();
-        }
     }
 
     protected void Frightened()
@@ -81,18 +123,15 @@ public class Ghost : MonoBehaviour
         {
             MoveTowardsTarget(GameController.Instance.GameGrid.GetRandomTile());
         }
-
-        if (m_targetNode != null)
-        {
-            Move();
-        }
     }
 
+    //Checks to see if we have arrived close enough to our target node otherwise move towards it.
     private void Move()
     {
         if (Vector2.Distance(transform.position, m_targetNode.transform.position) <= MINIMUM_DISTANCE_TO_NODE)
         {
             transform.localPosition = m_targetNode.transform.localPosition;
+            m_previousNode = m_currentNode;
             m_currentNode = m_targetNode;
             m_targetNode = null;
         }
@@ -143,19 +182,17 @@ public class Ghost : MonoBehaviour
     //Too be called any time a ghost changes states. causing it to reverse direction
     private void ReverseDirection()
     {
+        m_targetNode = m_previousNode;
         m_currentDirection = m_currentDirection *-1;
-        Node tempPreviousNode = m_previousNode;
-        m_previousNode = m_targetNode;
-        m_targetNode = tempPreviousNode;
-        m_currentNode = null;
     }
-
-    public void ChangeMode(GhostMode newMode)
+    
+    private void HandleOnStateChange(GhostMode newMode)
     {
-        ReverseDirection();
-        m_currentMode = newMode;
+        //ReverseDirection(); // causing issues wherin ghost will go through walls. Some node is not being set propperly.
+        CurrentMode = newMode;
     }
 
+    //Moves between teleport nodes
     public void Teleport(Node connectedNode)
     {
         transform.localPosition = connectedNode.transform.localPosition;
@@ -164,7 +201,21 @@ public class Ghost : MonoBehaviour
         m_targetNode = null;
     }
 
+    //overidden by the child classes, sets the target for chase.
     public virtual void SetTarget()
     {
+    }
+
+    //Handle Ghost death
+    public void Die()
+    {
+        m_IsDead = true;
+        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        this.gameObject.GetComponent<Collider>().enabled = false;
+
+        m_currentDirection = Vector2.zero;
+        transform.localPosition = m_SpawnNode.transform.localPosition;
+        m_currentNode = m_SpawnNode;
+        m_targetNode = null;
     }
 }

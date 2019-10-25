@@ -7,6 +7,6 @@ public class Powerup : Collectable
     
     public override void HandleOnCollect()
     {
-        
+        GameController.Instance.ChangeToFrightened();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private Board m_gameGrid;
     [SerializeField] private TextMeshProUGUI m_ScoreText;
+    [SerializeField] private TextMeshProUGUI m_EndgameText;
+    [SerializeField] private TextMeshProUGUI m_LivesText;
     [SerializeField] private GameObject m_Inky;
     [SerializeField] private GameObject m_Blinky;
     [SerializeField] private GameObject m_Pinky;
@@ -23,22 +26,45 @@ public class GameController : MonoBehaviour
     
     private const float PINKY_TIMER_LIMIT = 3f;
     private const float INKY_SCORE_LIMIT = 30;
-    private const float CLYDE_SCORE_LIMIT = 300/3;
+    private const float CLYDE_SCORE_LIMIT = 244/3;
     private const float MAX_FIGHTENED_TIME = 5f;
     
+    private bool m_isPinkySpawned = false;
+    private bool m_isInkySpawned = false;
+    private bool m_isClydeSpawned = false;
+    
     private Dictionary<Vector3,Node> m_IntersectionNodeDictionary;
-    private int m_score = 0;
+    private int m_Score = 0;
+    private int m_PelletsCollected = 0;
+    private int m_Lives = 3;
     private float m_Timer;
     private float m_FrightenedTimer;
     private bool m_IsFrightened = false;
     private int m_GhostModeIndex = 0;
+    private Ghost.GhostMode m_CurrentGhostMode = Ghost.GhostMode.Chase;
+    
+    public event Action<Ghost.GhostMode> OnStateChange;
 
-    public int Score
+    public int PelletCount
     {
-        get { return m_score; }
+        get => m_PelletsCollected;
         set
         {
-            m_score = value;
+            m_PelletsCollected++;
+            if (PelletCount == 244)
+            {
+                Win();
+            }
+            Score++;
+        } 
+    }
+    
+    public int Score
+    {
+        get { return m_Score; }
+        set
+        {
+            m_Score = value;
             UpdateScoreText();
         }
     }
@@ -48,13 +74,14 @@ public class GameController : MonoBehaviour
     public GameObject Blinky => m_Blinky;
     public GameObject Pinky => m_Pinky;
     public GameObject Clyde => m_Clyde;
-
-
+    public Ghost.GhostMode CurrentGhostMode => m_CurrentGhostMode;
+    
     private void UpdateScoreText()
     {
         m_ScoreText.text = Score.ToString();
     }
 
+    //Quick access to GameGrid for querying locations maybe should be an instanced item
     public Board GameGrid
     {
         get => m_gameGrid;
@@ -68,11 +95,14 @@ public class GameController : MonoBehaviour
         } else {
             _instance = this;
         }
+        
+        m_LivesText.text = m_Lives.ToString();
     }
 
+    //Handles timers for game states. Only two real persistance states, frightened or not. Ghosts are released and scatter/chases are toggled betwee otherwise
     private void Update()
     {
-        if (!m_IsFrightened)
+        if (!m_IsFrightened) // we dont want to increment or change ghost modes while frightened
         {
             m_Timer += Time.deltaTime;
         
@@ -82,44 +112,87 @@ public class GameController : MonoBehaviour
         else
         {
             m_FrightenedTimer += Time.deltaTime;
-            if (m_FrightenedTimer >= MAX_FIGHTENED_TIME)
+            if (m_FrightenedTimer >= MAX_FIGHTENED_TIME) //once the timer has elapsed well return ghosts to normal state.
             {
                 m_IsFrightened = false;
                 m_FrightenedTimer = 0;
                 //change out of frightened state
             }
         }
-
     }
 
+    //As time and score increases we unlock the appropriate ghost
     private void UnlockGhosts()
     {
-        if (m_Timer >= PINKY_TIMER_LIMIT)
+        if (m_Timer >= PINKY_TIMER_LIMIT && !m_isPinkySpawned)
         {
+            m_isPinkySpawned = true;
             m_Pinky.SetActive(true);
+            Pinky.GetComponent<Ghost>().CurrentMode = m_CurrentGhostMode;
         }
 
-        if (Score >= INKY_SCORE_LIMIT)
+        if (PelletCount >= INKY_SCORE_LIMIT && !m_isInkySpawned)
         {
+            m_isInkySpawned = true;
             m_Inky.SetActive(true);
+            m_Inky.GetComponent<Ghost>().CurrentMode = m_CurrentGhostMode;
         }
 
-        if (Score >= CLYDE_SCORE_LIMIT)
+        if (PelletCount >= CLYDE_SCORE_LIMIT && !m_isClydeSpawned)
         {
+            m_isClydeSpawned = true;
             m_Clyde.SetActive(true);
+            m_Clyde.GetComponent<Ghost>().CurrentMode = m_CurrentGhostMode;
         }
-        
     }
 
     private void ToggleChase()
     {
-        if (m_Timer >= m_GhostModeTimes[m_GhostModeIndex])
+        if (m_GhostModeIndex < m_GhostModeTimes.Length && m_Timer >= m_GhostModeTimes[m_GhostModeIndex])
         {
-            //toggle the chase
+            //toggle between chase and scatter
             m_GhostModeIndex++;
+            if (m_GhostModeIndex % 2 == 0)
+            {
+                OnStateChange(Ghost.GhostMode.Chase);
+                m_CurrentGhostMode = Ghost.GhostMode.Chase;
+            }
+            else
+            {
+                OnStateChange(Ghost.GhostMode.Scatter);
+                m_CurrentGhostMode = Ghost.GhostMode.Scatter;
+            }
             m_Timer = 0;
         }
-        
+    }
+
+    public void ChangeToFrightened()
+    {
+        OnStateChange(Ghost.GhostMode.Frightened);
+        m_CurrentGhostMode = Ghost.GhostMode.Frightened;
+        m_IsFrightened = true;
+    }
+
+    public void Die()
+    {
+        m_Lives--;
+        if (m_Lives <= 0)
+        {
+            Lose();
+        }
+        m_LivesText.text = m_Lives.ToString();
     }
     
+    private void Win()
+    {
+        Time.timeScale = 0f;
+        m_EndgameText.text = "YOU WIN!";
+    }
+
+    private void Lose()
+    {
+        Time.timeScale = 0f;
+        m_EndgameText.text = "YOU LOSE!"; 
+    }
+
 }

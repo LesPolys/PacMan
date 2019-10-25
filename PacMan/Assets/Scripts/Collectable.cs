@@ -1,17 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/*
+ * Collectable parent class for all collectables
+ */
 public abstract class Collectable : MonoBehaviour
 {
     public abstract void HandleOnCollect();
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player") // determine if collision was with player
         {
             HandleOnCollect();
-            this.gameObject.GetComponent<Collider>().enabled = false;
+            this.gameObject.GetComponent<Collider>().enabled = false; //hide the pellet
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }

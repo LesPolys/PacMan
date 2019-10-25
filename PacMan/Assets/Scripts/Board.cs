@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+ /*
+ *The Board lays the whole game as a set of tiles.
+ *Allows us to queuery the board for positions so we can pass them the ghosts as targets.
+ *Allows us to keep track of positions in an orderly fashion when not using the node system 
+ */
+
 public class Board : MonoBehaviour
 {
     public LayerMask wallMask;
@@ -21,6 +27,7 @@ public class Board : MonoBehaviour
         CreateGrid();
     }
 
+    //populates the grid and assigns wethere or not the space is occupied by a wall or open
     void CreateGrid()
     {
         grid = new Tile[gridSizeX,gridSizeY];
@@ -37,6 +44,7 @@ public class Board : MonoBehaviour
         }
     }
 
+    //takes a worldspace position and return the matching tile
     public Tile TileAtWorldPosition(Vector3 worldPosition)
     {
         float percentX = (worldPosition.x + gridSize.x / 2) / gridSize.x;
@@ -49,19 +57,7 @@ public class Board : MonoBehaviour
         return grid[x, y];
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, new Vector3(gridSize.x, gridSize.y, 0));
-        if (grid != null)
-        {
-            foreach (Tile tile in grid)
-            {
-                Gizmos.color = (!tile.isWall) ? Color.blue : Color.white;
-                Gizmos.DrawCube(tile.position, Vector3.one * tileDiameter);
-            }
-        }
-    }
-
+    //gets us a random tile, to be used with frightened state as a location to target
     public Vector3 GetRandomTile()
     {
         return grid[Random.Range(0,gridSizeX), Random.Range(0,gridSizeY)].position;

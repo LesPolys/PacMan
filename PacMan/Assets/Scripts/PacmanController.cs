@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,20 +15,28 @@ public class PacmanController : MonoBehaviour
     private Vector2 m_currentDirection = Vector2.zero;
     private Vector2 m_queuedDirection = Vector2.zero;
 
+    private Node m_SpawnNode;
+
     public Vector2 CurrentDirection => m_currentDirection;
+
+    private void Awake()
+    {
+        m_SpawnNode = m_currentNode;
+    }
 
     void Start()
     {
-        UpdateMovementTarget(Vector2.left);
+        UpdateMovementTarget(Vector2.left); // always start left
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckInput();
         Move();
     }
 
+    //tries to move the player towards the current target node
+    //if the target is reached we attempt to immediatly set the new target using the queued direction of the player.
     private void Move()
     {
         if (m_targetNode != m_currentNode)
@@ -67,6 +76,7 @@ public class PacmanController : MonoBehaviour
         }
     }
 
+    //Provided a diretion, tries to set the new node target the player wishes to reach. If the opposite diretion to current facing is pressed the node is flipped back to the previous
     private void UpdateMovementTarget(Vector2 direction)
     {
         if (direction != m_currentDirection)
@@ -97,6 +107,7 @@ public class PacmanController : MonoBehaviour
         }
     }
 
+    //Handles user input to determine new direction on next intersection
     private void CheckInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -117,6 +128,7 @@ public class PacmanController : MonoBehaviour
         }
     }
 
+    //checks if the intersection we have reached as a valid neighbor we can move to using the provided direction
     private Node ValidMove(Vector2 direction)
     {
         Node resultNode = null;
@@ -131,7 +143,7 @@ public class PacmanController : MonoBehaviour
         return resultNode;
     }
 
-
+    //Handles moving the player between teleport nodes
     public void Teleport(Node connectedNode)
     {
         m_previousNode = connectedNode;
@@ -139,5 +151,25 @@ public class PacmanController : MonoBehaviour
         transform.localPosition = connectedNode.transform.localPosition;
 
         UpdateMovementTarget(m_currentDirection);
+    }
+
+    //handles colliding with ghosts
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Ghost")
+        {
+            if (GameController.Instance.CurrentGhostMode == Ghost.GhostMode.Frightened)
+            {
+                other.GetComponent<Ghost>().Die();
+                GameController.Instance.Score += 200;
+            }
+            else
+            {
+                transform.localPosition = m_SpawnNode.transform.localPosition;
+                m_currentNode = m_SpawnNode;
+                m_previousNode = m_currentNode;
+                GameController.Instance.Die();
+            }
+        }
     }
 }
