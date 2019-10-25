@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
@@ -32,8 +29,6 @@ public class GameController : MonoBehaviour
     private bool m_isPinkySpawned = false;
     private bool m_isInkySpawned = false;
     private bool m_isClydeSpawned = false;
-    
-    private Dictionary<Vector3,Node> m_IntersectionNodeDictionary;
     private int m_Score = 0;
     private int m_PelletsCollected = 0;
     private int m_Lives = 3;
@@ -45,6 +40,7 @@ public class GameController : MonoBehaviour
     
     public event Action<Ghost.GhostMode> OnStateChange;
 
+    //when pellets collected reaches a certain threshold (all pellets) we win 
     public int PelletCount
     {
         get => m_PelletsCollected;
@@ -59,6 +55,7 @@ public class GameController : MonoBehaviour
         } 
     }
     
+    //When score is changed updated the text display
     public int Score
     {
         get { return m_Score; }
@@ -89,6 +86,7 @@ public class GameController : MonoBehaviour
     
     private void Awake()
     {
+        //create game instance
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -96,6 +94,7 @@ public class GameController : MonoBehaviour
             _instance = this;
         }
         
+        //inital setting of lives text
         m_LivesText.text = m_Lives.ToString();
     }
 
@@ -146,6 +145,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //toggle between chase and scatter mode based on the wave timer
     private void ToggleChase()
     {
         if (m_GhostModeIndex < m_GhostModeTimes.Length && m_Timer >= m_GhostModeTimes[m_GhostModeIndex])
@@ -166,6 +166,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    // change to frightened mode    
     public void ChangeToFrightened()
     {
         OnStateChange(Ghost.GhostMode.Frightened);
@@ -173,6 +174,7 @@ public class GameController : MonoBehaviour
         m_IsFrightened = true;
     }
 
+    //When player dies, decrease life count, if too low. game over
     public void Die()
     {
         m_Lives--;
@@ -183,12 +185,14 @@ public class GameController : MonoBehaviour
         m_LivesText.text = m_Lives.ToString();
     }
     
+    //Pause game timescale and display win
     private void Win()
     {
         Time.timeScale = 0f;
         m_EndgameText.text = "YOU WIN!";
     }
 
+    //pause game timescale and display lose
     private void Lose()
     {
         Time.timeScale = 0f;

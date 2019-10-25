@@ -5,7 +5,6 @@
  * handles all ghost movement and mode changes
  * all child classes take over providing the target positon to use during the chase mode.
  */
-
 public class Ghost : MonoBehaviour
 {
     [SerializeField] protected float m_speed = 3.0f;
@@ -28,7 +27,7 @@ public class Ghost : MonoBehaviour
     protected Node m_targetNode;
     protected Vector2 m_currentDirection = Vector2.zero;
 
-    public GhostMode CurrentMode
+    public GhostMode CurrentMode //if our property is updated between frightened or not then we want to set our material accordinly
     {
         get => m_currentMode;
         set
@@ -46,23 +45,27 @@ public class Ghost : MonoBehaviour
         }
     }
 
-    public enum GhostMode
+    //ghosts can only be in the chase, scatter or frightened states
+    public enum GhostMode 
     {
         Chase,
         Scatter,
         Frightened,
     }
 
+    //grab our first node so we can use it as a spawn point if the ghost is to die
     private void Awake()
     {
         m_SpawnNode = m_currentNode;
     }
 
+    //subscribe to the gamecontroller to see when states are updated
     private void Start()
     {
         GameController.Instance.OnStateChange += HandleOnStateChange;
     }
 
+    //Handle movement and target selection based on current state
     private void Update()
     {
         if (!m_IsDead)
@@ -89,6 +92,7 @@ public class Ghost : MonoBehaviour
         }
         else
         {
+            //Hide the dead ghost for a specific time before re-displaying them
             m_DeathTimer += Time.deltaTime;
             if (m_DeathTimer >= MAX_DEATH_TIME)
             {
@@ -100,6 +104,8 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    //Each ghost has its own scatter target in their respective corner
+    //as the ghost approaches its scatter target it will become locked into a loop around an area
     protected void Scatter()
     {
         if (m_targetNode == null)
@@ -108,6 +114,7 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    //when Chasing each ghost overrides SetTarget in order to create its own unqiue behaviour
     protected void Chase()
     {
         if (m_targetNode == null)
@@ -117,6 +124,7 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    //When frightened ghosts target a random tile on the board
     protected void Frightened()
     {
         if (m_targetNode == null)
@@ -141,6 +149,12 @@ public class Ghost : MonoBehaviour
         } 
     }
 
+    //As per https://www.gamasutra.com/view/feature/132330/the_pacman_dossier.php
+    //when a ghost arrives at an intersection they look at all tiles adjacent to the intersection that they could move
+    //ghosts can never move backwards though
+    //they then compare this adjacent tile to the target tile they are trying to reach
+    //the tile selected is the one physically closest to the target tile
+    //they then select that direction.
     private void MoveTowardsTarget(Vector3 target)
     {
         Vector2 currentBest = Vector2.zero;

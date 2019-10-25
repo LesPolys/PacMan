@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
  /*
  *The Board lays the whole game as a set of tiles.
  *Allows us to queuery the board for positions so we can pass them the ghosts as targets.
  *Allows us to keep track of positions in an orderly fashion when not using the node system 
  */
-
 public class Board : MonoBehaviour
 {
     public LayerMask wallMask;

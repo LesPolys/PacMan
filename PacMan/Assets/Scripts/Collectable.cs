@@ -12,7 +12,7 @@ public abstract class Collectable : MonoBehaviour
         if (other.gameObject.tag == "Player") // determine if collision was with player
         {
             HandleOnCollect();
-            this.gameObject.GetComponent<Collider>().enabled = false; //hide the pellet
+            this.gameObject.GetComponent<Collider>().enabled = false; //hide the pelletpe
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }

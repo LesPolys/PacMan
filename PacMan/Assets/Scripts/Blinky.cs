@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Blinky : Ghost
+﻿public class Blinky : Ghost
 {
     public override void SetTarget()
     {
